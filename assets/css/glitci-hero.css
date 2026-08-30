@@ -1,0 +1,582 @@
+/* Isolated homepage hero tokens and composition. */
+.glitci-hero__scroll-space {
+  position: relative;
+  height: 100svh;
+}
+
+.glitci-header-handoff {
+  top: 0;
+}
+
+.glitci-hero {
+  --hero-gradient-angle: 124deg;
+  --hero-gradient-start: #d53b34;
+  --hero-gradient-end: #040303;
+  --hero-gradient-position: 61%;
+  --hero-gradient-intensity: 0.86;
+  --robot-x: 0px;
+  --robot-y: 0px;
+  --robot-tilt: 0deg;
+  --logo-parallax-x: 0px;
+  --logo-parallax-y: 0px;
+  isolation: isolate;
+  position: relative;
+  z-index: 3;
+  height: 100svh;
+  min-height: max(720px, 100svh);
+  overflow: clip;
+  color: #fff;
+  background: linear-gradient(var(--hero-gradient-angle),
+      var(--hero-gradient-start) 0%,
+      var(--hero-gradient-end) var(--hero-gradient-position));
+}
+
+.glitci-hero__atmosphere,
+.glitci-hero__atmosphere::before,
+.glitci-hero__atmosphere::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* .glitci-hero__atmosphere {
+  z-index: -1;
+  opacity: var(--hero-gradient-intensity);
+  background:
+    radial-gradient(circle at 50% 44%, rgba(255, 255, 255, 0.11), transparent 22%),
+    radial-gradient(circle at 68% 38%, rgba(213, 59, 52, 0.28), transparent 32%);
+}
+
+.glitci-hero__atmosphere::before {
+  content: "";
+  background-image: linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle at 50% 42%, #000 2%, transparent 62%);
+  opacity: 0.28;
+}
+
+.glitci-hero__atmosphere::after {
+  content: "";
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.07), rgba(0, 0, 0, 0.55));
+} */
+
+
+.glitci-hero__scene {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 3;
+}
+
+/* Background Color */
+
+.glitci-hero__atmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+
+  opacity: var(--hero-gradient-intensity);
+
+  background:
+    /* Main hot red light source — upper left */
+    radial-gradient(ellipse 48% 62% at 4% 8%,
+      rgba(255, 12, 24, 0.98) 0%,
+      rgba(235, 3, 16, 0.88) 18%,
+      rgba(180, 25, 28, 0.55) 38%,
+      rgba(95, 16, 18, 0.20) 58%,
+      transparent 78%),
+
+    /* Lower-left red spill */
+    radial-gradient(ellipse 42% 48% at 2% 92%,
+      rgba(213, 59, 52, 0.58) 0%,
+      rgba(120, 24, 25, 0.28) 38%,
+      transparent 72%),
+
+    /* Subtle red atmosphere behind the robot */
+    radial-gradient(ellipse 42% 58% at 43% 48%,
+      rgba(92, 18, 20, 0.42) 0%,
+      rgba(48, 11, 13, 0.22) 48%,
+      transparent 78%),
+
+    /* Deep red → black base */
+    linear-gradient(108deg,
+      #7A181A 0%,
+      #4A1113 25%,
+      #21090B 48%,
+      #0D0708 68%,
+      #030303 100%);
+}
+
+.glitci-hero__atmosphere::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  /* Extremely subtle technical grid */
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px,
+      transparent 1px),
+    linear-gradient(90deg,
+      rgba(255, 255, 255, 0.028) 1px,
+      transparent 1px);
+
+  background-size: 72px 72px;
+
+  mask-image:
+    radial-gradient(ellipse 70% 65% at 50% 45%,
+      #000 0%,
+      transparent 72%);
+
+  opacity: 0.16;
+}
+
+.glitci-hero__atmosphere::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  /* Cinematic vignette + dark lower floor */
+  background:
+    radial-gradient(ellipse 70% 72% at 50% 40%,
+      transparent 30%,
+      rgba(0, 0, 0, 0.12) 58%,
+      rgba(0, 0, 0, 0.42) 100%),
+
+    linear-gradient(180deg,
+      rgba(0, 0, 0, 0) 45%,
+      rgba(0, 0, 0, 0.18) 72%,
+      rgba(0, 0, 0, 0.58) 100%);
+}
+
+/* Background Color */
+
+
+/* Depth Background */
+
+/* GLITCI HERO — CINEMATIC GROUND / DEPTH */
+
+.glitci-hero__depth {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+
+/* SOFT STUDIO FLOOR */
+
+.glitci-hero__floor {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+
+  background:
+    /* Red light spilling across the LEFT side of the floor */
+    radial-gradient(ellipse 55% 45% at 4% 100%,
+      rgba(213, 59, 52, 0.28) 0%,
+      rgba(120, 25, 27, 0.14) 30%,
+      rgba(40, 10, 12, 0.04) 58%,
+      transparent 78%),
+
+    /* Soft light catching the floor around the robot */
+    radial-gradient(ellipse 34% 20% at 50% 88%,
+      rgba(255, 255, 255, 0.075) 0%,
+      rgba(255, 255, 255, 0.035) 25%,
+      rgba(255, 255, 255, 0.01) 48%,
+      transparent 75%),
+
+    /* Main black studio floor */
+    linear-gradient(to bottom,
+      transparent 57%,
+      rgba(8, 6, 7, 0.08) 63%,
+      rgba(5, 4, 5, 0.25) 72%,
+      rgba(2, 2, 2, 0.58) 84%,
+      rgba(0, 0, 0, 0.92) 100%);
+
+  opacity: 1;
+}
+
+
+/* Subtle perspective surface */
+
+.glitci-hero__floor::before {
+  content: "";
+  position: absolute;
+
+  left: -12%;
+  right: -12%;
+  bottom: -30%;
+
+  height: 55%;
+
+  transform:
+    perspective(900px) rotateX(62deg);
+
+  transform-origin: center top;
+
+  background:
+    radial-gradient(ellipse at 50% 0%,
+      rgba(255, 255, 255, 0.055) 0%,
+      rgba(255, 255, 255, 0.018) 28%,
+      transparent 65%),
+
+    linear-gradient(to bottom,
+      rgba(8, 8, 8, 0.25),
+      rgba(0, 0, 0, 0.85));
+
+  filter: blur(1px);
+
+  opacity: 0.72;
+
+  /* This makes the floor fade into the environment
+    instead of creating a visible horizon line. */
+  mask-image:
+    linear-gradient(to bottom,
+      transparent 0%,
+      black 12%,
+      black 62%,
+      transparent 100%);
+}
+
+
+
+/* ROBOT CONTACT SHADOW */
+
+.glitci-hero__robot-shadow {
+  position: absolute;
+
+  left: 50%;
+  bottom: 19.8%;
+
+  width: clamp(190px, 18vw, 330px);
+  height: clamp(20px, 2.4vw, 42px);
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(ellipse at center,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.72) 30%,
+      rgba(0, 0, 0, 0.38) 55%,
+      transparent 78%);
+
+  filter: blur(6px);
+
+  opacity: 0.9;
+}
+
+/* Depth Background */
+
+
+.glitci-logo-crop {
+  position: relative;
+  display: block;
+  aspect-ratio: 2.068 / 1;
+  overflow: hidden;
+}
+
+.glitci-logo-crop img {
+  position: absolute;
+  top: -62.6%;
+  left: -4.36%;
+  display: block;
+  width: 108%;
+  max-width: none;
+  height: auto;
+}
+
+.glitci-header-logo {
+  display: block;
+  width: min(84px, 100%);
+  opacity: 0;
+  visibility: hidden;
+  will-change: opacity, visibility;
+}
+
+.glitci-header-logo .glitci-logo-crop {
+  width: 100%;
+}
+
+.glitci-hero__logo-motion {
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  z-index: 1;
+  width: min(88vw, 1000px);
+  will-change: transform, opacity;
+}
+
+.glitci-hero__logo-crop {
+  width: 100%;
+  filter: drop-shadow(0 22px 40px rgba(0, 0, 0, 0.28));
+}
+
+.glitci-hero__logo-parallax {
+  transform: translate3d(var(--logo-parallax-x), var(--logo-parallax-y), 0);
+  will-change: transform;
+}
+
+.glitci-hero__robot-scroll {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  transform-origin: center 58%;
+  will-change: transform, opacity;
+}
+
+.glitci-hero__robot-motion {
+  position: relative;
+  transform: translate3d(var(--robot-x), var(--robot-y), 0) rotate(var(--robot-tilt));
+  transform-origin: center 58%;
+  will-change: transform;
+}
+
+.glitci-hero__robot-stage {
+  position: relative;
+  width: auto;
+  height: clamp(500px, 76svh, 750px);
+  aspect-ratio: 0.62;
+  margin: 0;
+}
+
+/* Robot Shadow */
+
+.glitci-hero__robot-stage {
+  position: relative;
+  overflow: visible;
+  isolation: isolate;
+}
+
+.glitci-hero__robot-stage::after {
+  content: "";
+  position: absolute;
+
+  left: 50%;
+  bottom: 1.5%;
+
+  width: 72%;
+  height: 8%;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(ellipse at center,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.70) 38%,
+      rgba(0, 0, 0, 0.30) 65%,
+      transparent 100%);
+
+  filter: blur(7px);
+
+  opacity: 0.95;
+
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Robot Shadow */
+
+
+.glitci-hero__robot-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+}
+
+.glitci-hero__content {
+  position: absolute;
+  z-index: 3;
+  right: clamp(24px, 5.5vw, 88px);
+  bottom: clamp(28px, 5.4vh, 66px);
+  left: clamp(24px, 5.5vw, 88px);
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 32px;
+  pointer-events: none;
+}
+
+.glitci-hero__intro {
+  max-width: 490px;
+}
+
+.glitci-hero__eyebrow,
+.glitci-hero__cursor-cue {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.73);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.glitci-hero h1 {
+  max-width: 8.8em;
+  margin: 12px 0 0;
+  color: #fff;
+  font-size: clamp(34px, 4.1vw, 70px);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 0.95;
+}
+
+.glitci-hero__action {
+  width: min(100%, 272px);
+  pointer-events: auto;
+}
+
+.glitci-hero__action p {
+  margin: 0 0 18px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.glitci-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px 12px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.glitci-hero__cta:hover {
+  border-color: #fff;
+  background: #fff;
+  color: #2d0908;
+}
+
+.glitci-hero__cta:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+.glitci-hero__cta .icon {
+  font-size: 17px;
+}
+
+.glitci-hero__cursor-cue {
+  position: absolute;
+  z-index: 3;
+  top: clamp(126px, 18vh, 180px);
+  right: clamp(24px, 5.5vw, 88px);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  transition: opacity 220ms ease;
+}
+
+@media (max-width: 1023px) {
+  .glitci-hero {
+    min-height: max(680px, 100svh);
+  }
+
+  .glitci-hero__logo-motion {
+    top: 40%;
+    width: min(98vw, 860px);
+  }
+
+  .glitci-hero__robot-stage {
+    width: auto;
+    height: clamp(460px, 72svh, 640px);
+  }
+}
+
+@media (max-width: 767px) {
+  .tf-header .glitci-header-logo {
+    width: 76px;
+  }
+
+  .glitci-hero {
+    min-height: max(650px, 100svh);
+  }
+
+  .glitci-hero__atmosphere::before {
+    background-size: 54px 54px;
+    opacity: 0.2;
+  }
+
+  .glitci-hero__logo-motion {
+    top: 36%;
+    width: 123vw;
+  }
+
+  .glitci-hero__robot-scroll {
+    top: 43%;
+  }
+
+  .glitci-hero__robot-stage {
+    width: min(75vw, 370px);
+    height: auto;
+  }
+
+  .glitci-hero__content {
+    right: 20px;
+    bottom: 23px;
+    left: 20px;
+    display: block;
+  }
+
+  .glitci-hero__intro {
+    max-width: 300px;
+  }
+
+  .glitci-hero h1 {
+    max-width: 7.7em;
+    margin-top: 9px;
+    font-size: clamp(32px, 10.6vw, 48px);
+  }
+
+  .glitci-hero__action {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: min(42vw, 180px);
+  }
+
+  .glitci-hero__action p {
+    display: none;
+  }
+
+  .glitci-hero__cta {
+    min-height: 43px;
+    padding: 10px 11px 10px 13px;
+    font-size: 10px;
+  }
+
+  .glitci-hero__cursor-cue {
+    top: 114px;
+    right: 20px;
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .glitci-hero__logo-parallax,
+  .glitci-hero__robot-motion {
+    transform: none;
+  }
+}
